@@ -1,0 +1,50 @@
+<div class="main-content right-chat-active">
+    <div class="middle-sidebar-bottom">
+        <div class="middle-sidebar-left">
+            <div class="row feed-body">
+                <div #middleColumn class="col-xl-12 col-xxl-12 col-lg-12">
+
+                    <div #testerLeft class="tester-left"></div>
+                    <div #testerRight class="tester-right"></div>
+
+                    <app-total-overview></app-total-overview>
+                    <div #postCreator>
+                        <app-createpost></app-createpost>
+                    </div>
+                    <app-postview [id]="'32'" [postimage]="postimage1" [avater]="randomAvatarSrc1" user="Surfiya Zakir"
+                        time="22 min ago"
+                        des="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncus.">
+                    </app-postview>
+                    <app-postview [id]="'31'" postvideo="" [postimage]="postimage2" [avater]="randomAvatarSrc2"
+                        user="David Goria" time="22 min ago"
+                        des="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncus.">
+                    </app-postview>
+                    <app-postview [id]="'33'" postvideo="" [postimage]="postimage3" [avater]="randomAvatarSrc3"
+                        user="Anthony Daugloi" time="2 hour ago"
+                        des="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncus.">
+                    </app-postview>
+                    <app-memberslider></app-memberslider>
+                    <app-postview [id]="'35'" postvideo="" [postimage]="postimage4" [avater]="randomAvatarSrc4"
+                        user="Victor Exrixon" time="3 hour ago"
+                        des="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncus.">
+                    </app-postview>
+                    <app-friendsilder></app-friendsilder>
+                    <app-postview [id]="'36'" postvideo="" [postimage]="postimage5" [avater]="randomAvatarSrc5"
+                        user="Victor Exrixon" time="12 hour ago"
+                        des="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncus.">
+                    </app-postview>
+                    <app-load></app-load>
+                </div>
+                <!--
+                <div class="col-xl-4 col-xxl-3 col-lg-4 ps-lg-0">
+                    <app-friends></app-friends>
+                    <app-contacts></app-contacts>
+                    <app-group></app-group>
+                    <app-events></app-events>
+                    <app-profilephoto></app-profilephoto>
+                </div>
+                -->
+            </div>
+        </div>
+    </div>
+</div>

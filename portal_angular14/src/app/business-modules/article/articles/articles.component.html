@@ -1,0 +1,24 @@
+<div class="card w-100 rounded-xxl border-0 mb-3" style="background-color: transparent !important">
+
+    <ul *ngIf="articles?.list_data?.length" style="background-color: transparent !important;">
+        <li *ngFor="let x of articles.list_data; let index = index" class="article-title bg-transparent">
+            <app-pagetitle [title]="x.artCaption" [showModify]="{
+                                to: '/article-edit',
+                                id: x.id
+                            }">
+            </app-pagetitle>
+            <div class="card-body d-flex pt-0 ps-4 pe-4 pb-3 overflow-hidden bg-white">
+
+                    <a [routerLink]="['/article', x.id ]" 
+                    style="background-color: transparent !important;">
+                        <span class="badge" [class.selected]="x.id === selectedId">{{ x.id }}</span>
+                        <span>
+                            <img [src]="randomImages[index]" alt='ImgLink' width="100px">
+                        </span>
+                        <div class="fw-lighter fs-5 text parag">{{ x.artBody }}</div>
+                    </a>
+            </div>
+            <div class="h100 bg-transparent"></div>
+        </li>
+    </ul>
+</div>

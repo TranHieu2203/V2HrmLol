@@ -1,0 +1,52 @@
+<div class="login-bg">
+</div>
+<div class="login-logo-wrapper">
+  <img src="../../../assets/images/login_tinhvanconsulting_logo.svg">
+</div>
+
+<div class="form-copyright-block">
+
+
+  <div class="form-wrapper">
+    <div class="histaff-logo-wrapper">
+      <img src="../../../assets/images/logo_histaff.png">
+    </div>
+
+    <div class="login-form">
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <div class="user-wrapper">
+          <span><i class="feather-user login-icon user-icon"></i></span>
+          <input type="text" class="user form-control" placeholder="Nhập tên đăng nhập" formControlName="username">
+        </div>
+
+        <div class="password-wrapper">
+          <span><i class="feather-lock login-icon lock-icon"></i></span>
+          <span><i class="login-icon eye-icon" [class.feather-eye]="!showPassword" [class.feather-eye-off]="showPassword" (click)="toggleShowPassword()"></i></span>
+          <input [type]="passwordInputType" class="password form-control" placeholder="Nhập mật khẩu" formControlName="password">
+        </div>
+
+        <div class="w-100p flex-between last-input-line">
+          <div class="remember-block">
+            <input type="checkbox" class="remember" formControlName="remember">
+            <span>Ghi nhớ đăng nhập</span>
+          </div>
+          <span class="forgot-text">Quên mật khẩu?</span>
+        </div>
+
+        <input type="submit" value="Đăng nhập" class="submit">
+
+      </form>
+    </div>
+
+  </div>
+
+
+  <div class="copyright">
+    <span>Copyright © Công ty cổ phần Tư vấn Quản trị Doanh nghiệp Tinh Vân </span>
+  </div>
+
+
+
+</div>

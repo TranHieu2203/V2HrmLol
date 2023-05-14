@@ -1,0 +1,31 @@
+﻿using Common.Paging;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace ProfileDAL.ViewModels
+{
+    public class InsuranceTypeDTO : Pagings
+    {
+        public int? Id { get; set; }
+        public int TypeId { get; set; }
+        public string TypeName { get; set; }
+        public string Name { get; set; }
+        public string Note { get; set; }
+        public Boolean? IsActive { get; set; }
+        public string CreateBy { get; set; }
+        public string UpdatedBy { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+    }
+   
+    public class InsuranceTypeInputDTO
+    {
+        public int? Id { get; set; }
+        public int TypeId { get; set; }
+        public string Name { get; set; }
+        public string Note { get; set; }
+
+    }
+
+}

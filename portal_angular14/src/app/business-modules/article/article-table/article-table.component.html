@@ -1,0 +1,4 @@
+<app-smart-table [loading]="loading" [inputData]="inputData" [selectedItem]="selectedItem" (onColumnsChanged)="onColumnsChanged($event)"></app-smart-table>
+<app-pagination [currentPage]="currentPage.value" [pageSize]="pageSize.value" [pageSizeOption]="pageSizeOption"
+[pageCount]="pageCount" [recordCount]="totalRow" (onCurrentPageChanged)="onCurrentPageChanged($event)"
+(onPageSizeChanged)="onPageSizeChanged($event)"></app-pagination>

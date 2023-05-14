@@ -1,0 +1,8 @@
+.textarea-body {
+    height: 600px !important;
+}
+
+.textarea-small {
+    height: 150px !important;
+    line-height: normal;
+}

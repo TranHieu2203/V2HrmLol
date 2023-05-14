@@ -1,0 +1,195 @@
+<div class="app-main-content">
+  <div class="app-container">
+    <!-- toolbar -->
+    <div class="app-toolbar">
+      <div class="card-center">
+        <!-- breadcrum-->
+        <div class="app-breadcrum">
+          <div class="brackcrum">
+            <i class="fa fa-sitemap" aria-hidden="true"></i>Hồ sơ <i
+              class="fa fa-angle-double-right" aria-hidden="true"></i>Danh mục
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <span class="brackcrum-active"
+              href='/cms/profile/list/allowanseemployee'>Phụ cấp nhân
+              viên</span>
+          </div>
+        </div>
+        <!-- toolbar -->
+        <app-common-tools name="allowanceemployee-edit" [items$]="toolItems$" (toolItemClicked)="clickToolbar($event)"></app-common-tools>
+      </div>
+    </div>
+    <!--main-content -->
+    <div class="app-content">
+    <div class="card-center">
+      <form name="editForm" [formGroup]="editForm" novalidate>
+        <div class="group-box">
+          <div class="card-head">
+            <div class="icon-info histaff-icon"></div>
+            <label class="title">Thông tin </label>
+          </div>
+          <!--  -->
+
+          <div class="row">
+            <div class="col-sm-6" *ngIf="flagState$.value!=='new'">
+              <div class="form-group vertical">
+                <label class="e-float-text ">Nhân viên</label>
+                <input class="form-control" type="text"
+                  formControlName="employeeName" [ngModel]="model.employeeName"
+                  readonly>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group vertical">
+                <label class="e-float-text required">Phụ
+                  cấp</label>
+                <ejs-dropdownlist id='allowanceId' [dataSource]='lstAllowanceId'
+                  formControlName="allowanceId" [showClearButton]="true"
+                  [(ngModel)]="model.allowanceId" [fields]='fields'
+                  [allowFiltering]='true'
+                  (filtering)='onFiltering($event,lstAllowanceId)'>
+                </ejs-dropdownlist>
+                <span class="input-error"
+                  *ngIf="editForm.get('allowanceId')!.hasError('required') && !editForm.get('allowanceId')!.untouched">
+                  Bắt buộc chọn
+                </span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group vertical">
+                <label class="e-float-text required">Số tiền</label>
+                <ejs-numerictextbox format="N0" locale="en" name="monney"
+                  formControlName="monney" [(ngModel)]="model.monney" min="0"
+                  max="999999999">
+                </ejs-numerictextbox>
+                <span class="input-error"
+                  *ngIf="editForm.get('monney')!.hasError('required') && !editForm.get('monney')!.untouched">
+                  Bắt buộc nhập
+                </span>
+              </div>
+            </div>
+            <!--  -->
+            <div class="col-sm-6">
+              <div class="form-group vertical">
+                <label class="e-float-text required">Ngày
+                  hiệu lực</label>
+                <ejs-datepicker id="dateStart" format="dd/MM/yyyy"
+                  [(ngModel)]="model.dateStart"
+                  (keydown)="changeDate('dateStart')"
+                  (blur)="changeDate('dateStart')" formControlName="dateStart"
+                  placeholder=".../.../...">
+                </ejs-datepicker>
+
+                <span class="input-error"
+                  *ngIf="editForm.get('dateStart')!.hasError('required') && !editForm.get('dateStart')!.untouched">
+                  Bắt buộc chọn
+                </span>
+                <span class="input-error"
+                  *ngIf="editForm.get('dateStart')!.hasError('incorrect') && !editForm.get('dateStart')!.untouched">
+                  Sai định dạng
+                </span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group vertical">
+                <label class="e-float-text ">Ngày
+                  hết hiệu lực</label>
+                <ejs-datepicker id="dateEnd" format="dd/MM/yyyy"
+                  [(ngModel)]="model.dateEnd" (keydown)="changeDateNoRequire('dateEnd')"
+                  (blur)="changeDateNoRequire('dateEnd')" formControlName="dateEnd"
+                  placeholder=".../.../...">
+                </ejs-datepicker>
+
+                <span class="input-error"
+                  *ngIf="editForm.get('dateEnd')!.hasError('incorrect') && !editForm.get('dateEnd')!.untouched">
+                  Sai định dạng
+                </span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group vertical">
+                <label class="e-float-text ">Ghi
+                  chú</label>
+                <textarea class="form-control" type="text" formControlName="note"
+                  [(ngModel)]="model.note"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div  class="group-box" *ngIf="flagState$.value=='new'">
+          <!--nhân viên -->
+          <div class="row" >
+            <div class="col-sm-6 mt-3" >
+              <div class="form-group vertical-flex">
+                <label class="e-float-text ">Nhân
+                  viên</label>
+                <input class="form-control" formControlName="employeeName"
+                  [(ngModel)]="model.employeeName" type="text"
+                  class="form-control" readonly>
+                <div class="input-group-append">
+                  <button class="btn btn-search" type="button"
+                    (click)="choiseEmp()"></button>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <div class="e-float-input">
+                  <div class="input-group mb-3">
+                    <button class="btn btn-outline-secondary ml-3" type="button"
+                      (click)="removeEmp()">Xóa</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row pt-3" >
+            <div class="col">
+              <cms-app-listemployee #listemployee></cms-app-listemployee>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    </div>
+
+  </div>
+</div>
+<!-- search employee -->
+<cms-app-modalsemp id="cms-app-modalsemp">
+</cms-app-modalsemp>
+<!-- CONFIRM BACK MODAL-->
+<gohr-confirm-modal id="confirm-back-modal">
+  <div class="row full-width gohr-modal-header">
+    Những thay đổi hiện tại sẽ bị mất. Bạn có thực sự muốn tiếp tục?
+  </div>
+  <div class="row full-width gohr-modal-footer text-center">
+    <button class="btn btn-primary" (click)="confirmBack('ok')">Đồng ý</button>
+    <button class="btn btn-default" (click)="confirmBack('cancel')">Hủy</button>
+  </div>
+</gohr-confirm-modal>
+
+<!-- CONFIRM DELETE MODAL-->
+<gohr-confirm-modal id="confirm-delete-modal">
+  <div class="row full-width gohr-modal-header">
+    Những thay đổi hiện tại sẽ bị mất. Bạn có thực sự muốn tiếp tục?
+  </div>
+  <div class="row full-width gohr-modal-footer text-center">
+    <button class="btn btn-primary" (click)="confirmDelete('ok')">Đồng
+      ý</button>
+    <button class="btn btn-default"
+      (click)="confirmDelete('cancel')">Hủy</button>
+  </div>
+</gohr-confirm-modal>
+
+<!-- CONFIRM DIRECT MODAL-->
+<gohr-confirm-modal id="confirm-direct-modal">
+  <div class="row full-width gohr-modal-header">
+    Những thay đổi hiện tại sẽ bị mất. Bạn có thực sự muốn tiếp tục?
+  </div>
+  <div class="row full-width gohr-modal-footer text-center">
+    <button class="btn btn-primary">Đồng
+      ý</button>
+    <button class="btn btn-default">Hủy</button>
+  </div>
+</gohr-confirm-modal>

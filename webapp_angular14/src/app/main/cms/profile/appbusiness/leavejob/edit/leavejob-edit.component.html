@@ -1,0 +1,408 @@
+<div class="app-main-content">
+  <div class="app-container">
+    <!-- toolbar -->
+    <div class="app-toolbar">
+      <div class="card-center">
+        <!-- breadcrum-->
+        <div class="app-breadcrum">
+          <div class="brackcrum">
+            <i class="fa fa-sitemap" aria-hidden="true"></i>Hồ sơ <i
+              class="fa fa-angle-double-right" aria-hidden="true"></i>Nghiệp vụ
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <span class="brackcrum-active"
+              href='/cms/profile/business/leavejob'>Thông tin nghỉ
+              việc</span>
+          </div>
+        </div>
+        <!-- toolbar -->
+        <div class="main-toolbar">
+          <button id="add" class="btn-action" (click)="clickToolbar(itemButton)"
+            *ngFor="let itemButton of toolbar"
+            [disabled]="itemButton.isDisable === true">
+            <p class="text-center"><i
+                class="fa {{itemButton.prefixIcon}} {{itemButton.iconColorClass}}"></i>
+            </p>
+            <p class="text-center">{{itemButton.text}}</p>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-content">
+      <div class="card-center">
+        <form name="editForm" [formGroup]="editForm" novalidate>
+          <!-- Thông tin hợp đồng -->
+          <div class="group-box">
+            <div class="card-head">
+              <div class="icon-info histaff-icon"></div>
+              <label class="title">Thông tin chung</label>
+            </div>
+            <div class="row">
+              <!-- mã nhân viên -->
+              <div class="col-sm-4">
+                <div class="form-group vertical-flex">
+                  <label class="e-float-text required" for="employeeCode">Mã
+                    nhân viên</label>
+                  <input formControlName="employeeCode"
+                    [(ngModel)]="model.employeeCode" type="text"
+                    class="form-control" readonly>
+                  <div class="input-group-append">
+                    <button class="btn btn-search" type="button"
+                      (click)="choiseEmp()"></button>
+                  </div>
+                  <span class="input-error"
+                    *ngIf="editForm.get('employeeCode')!.hasError('required') && !editForm.get('employeeCode')!.untouched">
+                    Bắt buộc chọn
+                  </span>
+                </div>
+              </div>
+              <!-- họ và tên -->
+              <div class="col-sm-4">
+                <div class="form-group vertical">
+                  <input type="text" formControlName="employeeName"
+                    class="form-control" [(ngModel)]="model.employeeName"
+                    readonly>
+                  <label class="e-float-text" for="fullname">Họ và Tên</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <!-- Phòng ban -->
+              <div class="col-sm-4">
+                <div class="form-group vertical">
+                  <label class="e-float-text" for="orgId">Phòng ban</label>
+                  <input type="text" formControlName="orgName"
+                    class="form-control" [(ngModel)]="model.orgName" readonly>
+                </div>
+              </div>
+              <!-- Chức danh -->
+              <div class="col-sm-4">
+                <div class="form-group vertical">
+                  <label class="e-float-text" for="positionId">Vị trí công việc</label>
+                  <input type="text" formControlName="positionName"
+                    class="form-control" [ngModel]="model.positionName"
+                    readonly>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <!-- Số hợp đồng -->
+              <div class="col-sm-4">
+                <div class="form-group vertical">
+                  <label class="e-float-text">Số hợp
+                    đồng</label>
+                  <input type="text" class="form-control"
+                    formControlName="contractNo" [(ngModel)]="model.contractNo"
+                    >
+                </div>
+              </div>
+              <!--Ngày hiệu lực  -->
+              <div class="col-sm-4">
+                <div class="form-group vertical">
+                  <label class="e-float-text">Ngày bắt đầu</label>
+                  <ejs-datepicker id="dateStart" format="dd/MM/yyyy"
+                    [(ngModel)]="model.dateStart"
+                    (keydown)="changeDate('dateStart')"
+                    (blur)="changeDate('dateStart')" formControlName="dateStart"
+                    placeholder=".../.../..." >
+                  </ejs-datepicker>
+                </div>
+              </div>
+              <!--Ngày kết thúc  -->
+              <div class="col-sm-4">
+                <div class="form-group vertical">
+                  <label class="e-float-text">Ngày kết thúc</label>
+                  <ejs-datepicker id="dateEnd" format="dd/MM/yyyy"
+                    [(ngModel)]="model.dateEnd"
+                    (keydown)="changeDate('dateEnd')"
+                    (blur)="changeDate('dateEnd')" formControlName="dateEnd"
+                     placeholder=".../.../..." >
+                  </ejs-datepicker>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Thông tin nghỉ việc -->
+          <div class="group-box">
+            <div class="card-head">
+              <div class="icon-info histaff-icon"></div>
+              <label class="title">Thông tin nghỉ việc</label>
+            </div>
+            <div class="row">
+              <!-- Số Quyết định  -->
+              <div class="col-sm-4">
+                <div class="form-group vertical">
+                  <input type="text" formControlName="decisionNo"
+                    class="form-control" [(ngModel)]="model.decisionNo" readonly>
+                  <label class="e-float-text ">Số quyết định</label>
+                 
+                </div>
+              </div>
+              <!--Ngày hiệu lực  -->
+              <div class="col-sm-4">
+                <div class="form-group vertical">
+                  <label class="e-float-text required" for="ngayhachtoan">Ngày
+                    hiệu lực</label>
+                  <ejs-datepicker id="effectDate" format="dd/MM/yyyy"
+                    [(ngModel)]="model.effectDate"
+                    (keydown)="changeDate('effectDate')"
+                    (blur)="changeDate('effectDate')"
+                    formControlName="effectDate" readonly
+                    placeholder=".../.../...">
+                  </ejs-datepicker>
+                  <span class="input-error"
+                    *ngIf="editForm.get('effectDate')!.hasError('required') && !editForm.get('effectDate')!.untouched">
+                    Bắt buộc chọn
+                  </span>
+                  <span class="input-error"
+                    *ngIf="editForm.get('effectDate')!.hasError('incorrect') && !editForm.get('effectDate')!.untouched">
+                    Sai định dạng
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <!--Ngày nộp đơn  -->
+              <div class="col-sm-4">
+                <div class="form-group vertical">
+                  <label class="e-float-text required">Ngày nộp đơn</label>
+                  <ejs-datepicker id="sendDate" format="dd/MM/yyyy"
+                    [(ngModel)]="model.sendDate"
+                    (keydown)="changeDate('sendDate')"
+                    (blur)="changeDate('sendDate')" formControlName="sendDate"
+                    placeholder=".../.../...">
+                  </ejs-datepicker>
+                  <span class="input-error"
+                  *ngIf="editForm.get('sendDate')!.hasError('required') && !editForm.get('sendDate')!.untouched">
+                  Bắt buộc chọn
+                </span>
+                <span class="input-error"
+                    *ngIf="editForm.get('sendDate')!.hasError('incorrect') && !editForm.get('sendDate')!.untouched">
+                    Sai định dạng
+                  </span>
+                </div>
+              </div>
+              <!--Ngày làm việc cuối cùng  -->
+              <div class="col-sm-4">
+                <div class="form-group vertical">
+                  <label class="e-float-text required">Ngày làm việc cuối
+                    cùng</label>
+                  <ejs-datepicker id="lastDate" format="dd/MM/yyyy"
+                    [(ngModel)]="model.lastDate"
+                    (keydown)="changeDate('lastDate')"
+                    (blur)="changeDate('lastDate')" formControlName="lastDate"
+                    placeholder=".../.../...">
+                  </ejs-datepicker>
+                  <span class="input-error"
+                    *ngIf="editForm.get('lastDate')!.hasError('required') && !editForm.get('lastDate')!.untouched">
+                    Bắt buộc chọn
+                  </span>
+                  <span class="input-error"
+                    *ngIf="editForm.get('lastDate')!.hasError('incorrect') && !editForm.get('lastDate')!.untouched">
+                    Sai định dạng
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <!--Lý do nghỉ việc  -->
+              <div class="col-sm-12">
+                <div class="form-group vertical">
+                  <label class="e-float-text required" for="terReason">Lý do
+                    nghỉ việc</label>
+                  <textarea class="form-control" formControlName="terReason"
+                    [(ngModel)]="model.terReason"></textarea>
+                  <span class="input-error input-error-textarea"
+                    *ngIf="editForm.get('terReason')!.hasError('required') && !editForm.get('terReason')!.untouched">
+                    Bắt buộc chọn
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Thông tin thanh lý hợp đồng-->
+          <div class="group-box">
+            <div class="card-head">
+              <div class="icon-info histaff-icon"></div>
+              <label class="title">Thông tin thanh lý hợp đồng</label>
+            </div>
+            <div class="row">
+              <!-- Số phép còn lại -->
+              <!-- <div class="col-sm-4">
+                <div class="form-group vertical">
+                  <label class="e-float-text">Số phép còn lại</label>
+                  <ejs-numerictextbox format="N0" locale="en" name="dayOffRest"
+                    formControlName="dayOffRest" [(ngModel)]="model.dayOffRest"
+                    min="1900" max="2100">
+                  </ejs-numerictextbox>
+                </div>
+              </div> -->
+              <!-- Tiền thanh toán phép -->
+              <!-- <div class="col-sm-4">
+                <div class="form-group vertical">
+                  <ejs-numerictextbox format="N0" locale="en"
+                    name="moneyOffRest" formControlName="moneyOffRest"
+                    [(ngModel)]="model.moneyOffRest" min="1900" max="2100">
+                  </ejs-numerictextbox>
+                  <label class="e-float-text " for="moneyOffRest">Tiền thanh
+                    toán phép</label>
+                </div>
+              </div> -->
+            </div>
+            <div class="row">
+              <!-- Phạt thời hạn báo trước -->
+              <div class="col-sm-4">
+                <div class="form-group vertical">
+                  <label class="e-float-text " for="amountViolations">Phạt vi
+                    phạm thời hạn báo trước</label>
+                  <ejs-numerictextbox format="N0" locale="en"
+                    name="amountViolations" formControlName="amountViolations"
+                    [(ngModel)]="model.amountViolations" min="0"
+                    max="999999999">
+                  </ejs-numerictextbox>
+                </div>
+              </div>
+              <!-- Chi phí đào tạo -->
+              <div class="col-sm-4">
+                <div class="form-group vertical">
+                  <label class="e-float-text ">Bồi hoàn chi phí đào
+                    tạo</label>
+                  <ejs-numerictextbox format="N0" locale="en"
+                    name="trainingCosts" formControlName="trainingCosts"
+                    [(ngModel)]="model.trainingCosts" min="0" max="999999999">
+                  </ejs-numerictextbox>
+                </div>
+              </div>
+              <!-- Bồi thường khác -->
+              <div class="col-sm-4">
+                <div class="form-group vertical">
+                  <label class="e-float-text " for="otherCompensation">Bồi
+                    thường khác</label>
+                  <ejs-numerictextbox format="N0" locale="en"
+                    name="otherCompensation" formControlName="otherCompensation"
+                    [(ngModel)]="model.otherCompensation" min="0"
+                    max="999999999">
+                  </ejs-numerictextbox>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- Phê duyệt-->
+          <div class="group-box">
+            <div class="card-head">
+              <div class="icon-info histaff-icon"></div>
+              <label class="title">Thông tin Phê duyệt</label>
+            </div>
+            <div class="row">
+              <!-- Người ký -->
+              <div class="col-sm-4">
+                <div class="form-group vertical-flex">
+                  <label class="e-float-text required" for="signer">Người
+                    ký</label>
+                  <input formControlName="signId" [(ngModel)]="model.signerName"
+                    type="text" class="form-control" readonly>
+                  <div class="input-group-append">
+                    <button class="btn btn-search" type="button"
+                      (click)="choiseSigner()"></button>
+                  </div>
+                  <span class="input-error"
+                    *ngIf="editForm.get('signId')!.hasError('required') && !editForm.get('signId')!.untouched">
+                    Bắt buộc chọn
+                  </span>
+                </div>
+              </div>
+              <!-- Chức danh -->
+              <div class="col-sm-4">
+                <div class="form-group vertical">
+                  <label class="e-float-text" for="signerPosition">Chức danh
+                    người ký</label>
+                  <input type="text" class="form-control"
+                    formControlName="signerPosition"
+                    [(ngModel)]="model.signerPosition" readonly>
+                </div>
+              </div>
+              <!--Ngày ký  -->
+              <div class="col-sm-4">
+                <div class="form-group vertical">
+                  <label class="e-float-text required" for="signDate">Ngày
+                    ký</label>
+                  <ejs-datepicker id="signDate" format="dd/MM/yyyy"
+                    [(ngModel)]="model.signDate"
+                    (keydown)="changeDate('signDate')"
+                    (blur)="changeDate('signDate')" formControlName="signDate"
+                    placeholder=".../.../...">
+                  </ejs-datepicker>
+                  <span class="input-error"
+                    *ngIf="editForm.get('signDate')!.hasError('required') && !editForm.get('signDate')!.untouched">
+                    Bắt buộc chọn
+                  </span>
+                  <span class="input-error"
+                    *ngIf="editForm.get('signDate')!.hasError('incorrect') && !editForm.get('signDate')!.untouched">
+                    Sai định dạng
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <!-- Trạng thái -->
+              <div class="col-sm-4">
+                <div class="form-group vertical">
+                  <label class="e-float-text required">Trạng thái</label>
+                  <ejs-dropdownlist id='statusId' [dataSource]='lstStatusId'
+                    formControlName="statusId" [showClearButton]="true"
+                    [(ngModel)]="model.statusId" [fields]='fields'
+                    [allowFiltering]='true'
+                    (filtering)='onFiltering($event,lstStatusId)'>
+                  </ejs-dropdownlist>
+                  <span class="input-error"
+                    *ngIf="editForm.get('statusId')!.hasError('required') && !editForm.get('statusId')!.untouched">
+                    Bắt buộc chọn
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- search employee -->
+<cms-app-modalsemp id="cms-app-modalsemp">
+</cms-app-modalsemp>
+<!-- CONFIRM BACK MODAL-->
+<gohr-confirm-modal id="confirm-back-modal">
+  <div class="row full-width gohr-modal-header">
+    Những thay đổi hiện tại sẽ bị mất. Bạn có thực sự muốn tiếp tục?
+  </div>
+  <div class="row full-width gohr-modal-footer text-center">
+    <button class="btn btn-primary" (click)="confirmBack('ok')">Đồng ý</button>
+    <button class="btn btn-default" (click)="confirmBack('cancel')">Hủy</button>
+  </div>
+</gohr-confirm-modal>
+
+<!-- CONFIRM DELETE MODAL-->
+<gohr-confirm-modal id="confirm-delete-modal">
+  <div class="row full-width gohr-modal-header">
+    Những thay đổi hiện tại sẽ bị mất. Bạn có thực sự muốn tiếp tục?
+  </div>
+  <div class="row full-width gohr-modal-footer text-center">
+    <button class="btn btn-primary" (click)="confirmDelete('ok')">Đồng
+      ý</button>
+    <button class="btn btn-default"
+      (click)="confirmDelete('cancel')">Hủy</button>
+  </div>
+</gohr-confirm-modal>
+
+<!-- CONFIRM DIRECT MODAL-->
+<gohr-confirm-modal id="confirm-direct-modal">
+  <div class="row full-width gohr-modal-header">
+    Những thay đổi hiện tại sẽ bị mất. Bạn có thực sự muốn tiếp tục?
+  </div>
+  <div class="row full-width gohr-modal-footer text-center">
+    <button class="btn btn-primary">Đồng
+      ý</button>
+    <button class="btn btn-default">Hủy</button>
+  </div>
+</gohr-confirm-modal>

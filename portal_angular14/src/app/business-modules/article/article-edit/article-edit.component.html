@@ -1,0 +1,51 @@
+<div class="right-chat-active">
+    <div class="middle-sidebar-bottom">
+        <div class="middle-sidebar-left pe-0">
+            <div class="row">
+                <div class="col-xl-12">
+                    <app-pagetitle [title]="'Editing ' + article.artCaption"></app-pagetitle>
+
+                    <form [formGroup]="articleForm" (ngSubmit)="submit()">
+                        <label for="artID">Category</label>
+                        <div class='form-group icon-input mb-3'>
+                            <p>
+                                <i class='font-sm ti-heart text-grey-500 pe-0'></i>
+                                <select class="form-control" formControlName="catID">
+                                    <option *ngFor="let cat of categories" [value]="cat.catID">
+                                        {{ cat.category }}
+                                    </option>
+                                </select>
+                            </p>
+                            <div *ngIf="formControls['artBody'].invalid && (formControls['artBody'].dirty || formControls['artBody'].touched)"
+                                class="help-block">
+                                <div *ngIf="formControls['artBody'].errors?.['required']" class="text-danger">ArtBody is
+                                    required</div>
+                            </div>
+                        </div>
+
+                        <label for="artBody">Body</label>
+                        <div class='form-group icon-input mb-3'>
+                            <p>
+                                <i class='font-sm ti-notepad text-grey-500 pe-0'></i>
+                                <textarea type="text" id="artBody" formControlName="artBody"
+                                    class="ps-5 form-control text-grey-900 textarea-small"
+                                    placeholder="ArtBody..."></textarea>
+                            </p>
+                            <div *ngIf="formControls['artBody'].invalid && (formControls['artBody'].dirty || formControls['artBody'].touched)"
+                                class="help-block">
+                                <div *ngIf="formControls['artBody'].errors?.['required']" class="text-danger">ArtBody is
+                                    required</div>
+                            </div>
+                        </div>
+                        <div className='col-sm-12 p-0 text-left'>
+                            <button type='submit' (submit)="submit()"
+                                class='form-control text-center text-white fw-600 bg-dark border-0 p-0 '>Save
+                                changes</button>
+                        </div>
+                        <app-load *ngIf="loading"></app-load>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

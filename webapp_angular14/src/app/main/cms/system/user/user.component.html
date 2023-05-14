@@ -1,0 +1,122 @@
+<div class="app-main-content">
+  <div class="app-container">
+    <div class="app-toolbar">
+      <div class="card-full">
+        <!-- breadcrum-->
+        <div class="app-breadcrum">
+          <div class="brackcrum">
+            <i class="fa fa-sitemap" aria-hidden="true"></i>Hệ thống
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <span class="brackcrum-active" href='/cms/system/user'>Tài
+              khoản</span>
+          </div>
+        </div>
+        <!-- toolbar -->
+        <app-common-tools name="user" [items$]="toolItems$" (toolItemClicked)="clickToolbar($event)"></app-common-tools>
+      </div>
+    </div>
+    <div class="app-content">
+      <div class="row">
+        <div class="col-sm-2 pt-2">
+          <div>
+            <ejs-treeview #listTreeObj id="default" (nodeSelected)="userSelecting($event!)">
+            </ejs-treeview>
+          </div>
+        </div>
+        <div class="col-sm-10 pt-2">
+
+          <div class="card card-content">
+            <div class="card-main-content">
+              <div class="list-grid">
+                <ejs-grid #overviewgrid id='overviewgrid' [dataSource]='data | async'
+                  (dataStateChange)="dataStateChange($event!)" rowHeight='35' headerHeight='52'
+                  [height]='configs.height()' [allowPaging]='true' [pageSettings]='configs.pageSettings'
+                  [enableHover]='true' (recordDoubleClick)="viewRecord($event!)" [allowSorting]='false'
+                  allowResizing='true' [locale]='configs.currentLang' [allowSelection]='true' [showColumnChooser]='true'
+                  [selectionSettings]='configs.selectionSettings' [editSettings]='configs.editSettings'
+                  [allowFiltering]='true' (rowSelecting)="setButtonStatus($event!)" [allowExcelExport]='true'
+                  (rowDeselecting)="setButtonStatus($event!)">
+                  <e-columns>
+                    <e-column type='checkbox' [showInColumnChooser]='false' [allowFiltering]='false'
+                      [allowSorting]='false' width='40' textAlign="Center" [allowEditing]="false">
+                    </e-column>
+                    <e-column field='id' [showInColumnChooser]='false' [visible]='false' headerText='ID'
+                      [isPrimaryKey]='true' [allowEditing]="false"></e-column>
+                    <!--  -->
+                    <e-column width="40" HeaderTextAlign="Center" textAlign="Center" headerText="STT"
+                      clipMode="EllipsisWithTooltip" [allowFiltering]='false'>
+                      <ng-template #template let-data>
+                        <span>{{ formatStt(data.index) }}</span>
+                      </ng-template>
+                    </e-column>
+                    <!--  -->
+                    <e-column field='userName' textAlign="Left" headerText="Tài khoản" clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='code' textAlign="Left" headerText="Mã NV" headerTextAlign="Center"
+                      textAlign="Center" clipMode='EllipsisWithTooltip' width="90"></e-column>
+                    <e-column field='fullName' textAlign="Left" headerText="Họ tên" clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='groupName' textAlign="Left" headerText="Nhóm tài khoản"
+                      clipMode='EllipsisWithTooltip'></e-column>
+                    <e-column field='isWebApp' width="70" field='isView' textAlign="Center" headerText="Web App">
+                      <ng-template #template let-data>
+                        <ejs-checkbox [ngModel]="data.isWebApp">
+                        </ejs-checkbox>
+                      </ng-template>
+                    </e-column>
+                    <e-column field='isPortal' width="80" field='isView' textAlign="Center" headerText="Mobile App">
+                      <ng-template #template let-data>
+                        <ejs-checkbox [ngModel]="data.isPortal">
+                        </ejs-checkbox>
+                      </ng-template>
+                    </e-column>
+
+                    <!--  -->
+                    <e-column field='lock' headerTextAlign="Center" headerText="Trạng thái"
+                      clipMode='EllipsisWithTooltip' [filter]='filterStatus' width="100">
+                      <ng-template #template let-data>
+                        <div class="row-status full-width">
+                          <div class="status-effect" *ngIf="!data.lock">
+                            <span>Hoạt động</span>
+                          </div>
+                          <div class="status-not-effect" *ngIf="data.lock">
+                            <span>Khóa</span>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </e-column>
+                  </e-columns>
+                </ejs-grid>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<input id="file" type="file" name="name"
+  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+  style="display: none;" (change)='inputFile($event!)' />
+<gohr-confirm-modal id="confirm-import-modal">
+  <div class="row full-width gohr-modal-header">
+    Xác nhận Import
+  </div>
+  <div class="row full-width gohr-modal-footer text-center">
+    <button class="btn btn-primary" (click)="confirmImport('ok')">Đồng
+      ý</button>
+    <button class="btn btn-default" (click)="confirmImport('cancel')">Hủy</button>
+  </div>
+</gohr-confirm-modal>
+
+<gohr-confirm-modal id="confirm-delete-modal">
+  <div class="row full-width gohr-modal-header">
+    Bạn có chắc chắn muốn xóa không ?
+  </div>
+  <div class="row full-width gohr-modal-footer text-center">
+    <button class="btn btn-primary" (click)="confirmDelete('ok')">Đồng
+      ý</button>
+    <button class="btn btn-default" (click)="confirmDelete('cancel')">Hủy</button>
+  </div>
+</gohr-confirm-modal>

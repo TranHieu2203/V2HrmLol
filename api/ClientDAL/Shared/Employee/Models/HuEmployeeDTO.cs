@@ -1,0 +1,448 @@
+﻿using Common.Paging;
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace ClientDAL.ViewModels
+{
+    public class EmployeeDTO : Pagings
+    {
+        public Int64? Id { get; set; }
+        public int? TenantId { get; set; }
+        public string Code { get; set; }
+        public string ContractNo { get; set; }
+        public DateTime? DateStart { get; set; }
+        public DateTime? DateEnd { get; set; }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Fullname { get; set; }
+        public string Image { get; set; }
+        public string Avatar { get; set; }
+        public int? OrgId { get; set; }
+        public string OrgName { get; set; }
+        public int? PositionId { get; set; }
+        public string PositionName { get; set; }
+        public Int64? DirectManagerId { get; set; }
+        public string DirectManagerName { get; set; }
+        public int? GenderId { get; set; }
+        public string GenderName { get; set; }
+        public string BirthDate { get; set; }
+        public string IdNo { get; set; }
+        public string IdDate { get; set; }
+        public string IdPlace { get; set; }
+        public int? ReligionId { get; set; }
+        public string ReligionName { get; set; }
+        public int? NativeId { get; set; }
+        public string NativeName { get; set; }
+        public int? NationalityId { get; set; }
+        public string NationalityName { get; set; }
+        public string Address { get; set; }
+        public string BirthPlace { get; set; }
+        public string JoinDate { get; set; }
+        public int? WorkStatusId { get; set; }
+        public string WorkStatusName { get; set; }
+        public int? ProvinceId { get; set; }
+        public string ProvinceName { get; set; }
+        public int? DistrictId { get; set; }
+        public string DistrictName { get; set; }
+        public int? WardId { get; set; }
+        public string WardName { get; set; }
+        public Int64? ContractId { get; set; }
+        public string ContractName { get; set; }
+        public DateTime? ContractExpired { get; set; }
+        public Int64? LastWorkingId { get; set; }
+        public string LastWorkingNo { get; set; }
+        public DateTime? TerEffectDate { get; set; }
+        public string ItimeCode { get; set; }
+        public int? SalaryTypeId { get; set; }
+        public string ObjectSalaryName { get; set; }
+        public string TaxCode { get; set; }
+        public string MobilePhone { get; set; }
+        public string WorkEmail { get; set; }
+        public string Email { get; set; }
+        public int? MaritalStatusId { get; set; }
+        public string MaritalStatusName { get; set; }
+        public string PassNo { get; set; }
+        public DateTime? PassDate { get; set; }
+        public DateTime? PassExpire { get; set; }
+        public string PassPlace { get; set; }
+        public string VisaNo { get; set; }
+        public DateTime? VisaDate { get; set; }
+        public DateTime? VisaExpire { get; set; }
+        public string VisaPlace { get; set; }
+        public string WorkPermit { get; set; }
+        public DateTime? WorkPermitDate { get; set; }
+        public DateTime? WorkPermitExpire { get; set; }
+        public string WorkPermitPlace { get; set; }
+        public string ContactPer { get; set; }
+        public string ContactPerPhone { get; set; }
+        public int? BankId { get; set; }
+        public string BankName { get; set; }
+        public string BankBranch { get; set; }
+        public string BankNo { get; set; }
+        public string SchoolId { get; set; }
+        public string SchoolName { get; set; }
+        public string QualificationId { get; set; }
+        public string QualificationName { get; set; }
+        public int? TrainingFormId { get; set; }
+        public string TrainingFormName { get; set; }
+        public int? LearningLevelId { get; set; }
+        public string LearningLevelName { get; set; }
+        public string Language { get; set; }
+        public string LanguageMark { get; set; }
+        public string CreateBy { get; set; }
+        public string UpdatedBy { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+    }
+
+    public class EmployeeInput
+    {
+        public Int64? Id { get; set; }
+        [Required(ErrorMessage = "{0}_Required")]
+        public string Code { get; set; }
+        [Required(ErrorMessage = "{0}_Required")]
+        public string FirstName { get; set; }
+        [Required(ErrorMessage = "{0}_Required")]
+        public string LastName { get; set; }
+        public string Fullname { get; set; }
+        public string Image { get; set; }
+        [Required(ErrorMessage = "{0}_Required")]
+        public int? OrgId { get; set; }
+        [Required(ErrorMessage = "{0}_Required")]
+        public int? PositionId { get; set; }
+        public string Avatar { get; set; }
+        public Int64? DirectManagerId { get; set; }
+        public int? GenderId { get; set; }
+        public DateTime? BirthDate { get; set; }
+        public string IdNo { get; set; }
+        public DateTime? IdDate { get; set; }
+        public string IdPlace { get; set; }
+        public int? ReligionId { get; set; }
+        public int? NativeId { get; set; }
+        public int? ResidentId { get; set; }
+        public int? BankId { get; set; }
+        public int? NationalityId { get; set; }
+        public string Address { get; set; }
+        public string BirthPlace { get; set; }
+        public DateTime? JoinDate { get; set; }
+        public int? WorkStatusId { get; set; }
+        public int? ProvinceId { get; set; }
+        public int? DistrictId { get; set; }
+        public int? WardId { get; set; }
+        public string CurAddress { get; set; }
+        public int? CurProvinceId { get; set; }
+        public int? CurDistrictId { get; set; }
+        public int? CurWardId { get; set; }
+        //public Int64? ContractId { get; set; }
+        public Int64? LastWorkingId { get; set; }
+        public DateTime? TerEffectDate { get; set; }
+        public string ItimeCode { get; set; }
+        public Int64? ObjectSalaryId { get; set; }
+        public string TaxCode { get; set; }
+        public string MobilePhone { get; set; }
+        public string WorkEmail { get; set; }
+        public string Email { get; set; }
+        public int? MaritalStatusId { get; set; }
+        public string PassNo { get; set; }
+        public DateTime? PassDate { get; set; }
+        public DateTime? PassExpire { get; set; }
+        public string PassPlace { get; set; }
+        public string VisaNo { get; set; }
+        public DateTime? VisaDate { get; set; }
+        public DateTime? VisaExpire { get; set; }
+        public string VisaPlace { get; set; }
+        public string WorkPermit { get; set; }
+        public DateTime? WorkPermitDate { get; set; }
+        public DateTime? WorkPermitExpire { get; set; }
+        public string WorkPermitPlace { get; set; }
+        public string WorkNo { get; set; } // so cchn
+        public DateTime? WorkDate { get; set; }
+        public string WorkPlace { get; set; }
+        public string WorkScope { get; set; }
+        public string ContactPer { get; set; }
+        public string ContactPerPhone { get; set; }
+        public string BankBranch { get; set; }
+        public string BankNo { get; set; }
+        public string SchoolId { get; set; }
+        public string QualificationId { get; set; }
+        public int? TrainingFormId { get; set; }
+        public int? LearningLevelId { get; set; }
+        public string Language { get; set; }
+        public string LanguageMark { get; set; }
+    }
+    public class EmployeePopup : Pagings
+    {
+        public Int64? EmployeeId { get; set; }
+        public string EmployeeCode { get; set; }
+        public string EmployeeName { get; set; }
+        public int? OrgId { get; set; }
+        public string OrgName { get; set; }
+        public int? PositionId { get; set; }
+        public string PositionName { get; set; }
+        public DateTime? TerEffectDate { get; set; }
+        public int? WorkStatusId { get; set; }
+        public long? WorkingId { get; set; }
+        public string OrgParentName { get; set; }
+        public DateTime? ContractExpired { get; set; }
+
+    }
+
+    public class SituationDTO
+    {
+        public long? Id { get; set; }
+        [Required(ErrorMessage = "{0}_Required")]
+        public int? RelationshipId { get; set; }
+        [Required(ErrorMessage = "{0}_Required")]
+        public long EmployeeId { get; set; }
+        [Required(ErrorMessage = "{0}_Required")]
+        public string Name { get; set; }
+        public string No { get; set; }
+        public string TaxNo { get; set; }
+        public string FamilyNo { get; set; }
+        public string FamilyName { get; set; }
+        public string Address { get; set; }
+        public DateTime? Birth { get; set; }
+        public DateTime? DateStart { get; set; }
+        public DateTime? DateEnd { get; set; }
+    }
+
+    public class EmployeeOutput
+    {
+
+        public long EmployeeId { get; set; }
+        public string EmployeeCode { get; set; }
+        public string EmployeeName { get; set; }
+        public int? PositionId { get; set; }
+        public string PositionName { get; set; }
+        public int OrgId { get; set; }
+        public string OrgName { get; set; }
+        public string OrgParentName { get; set; }
+        public string ContractNo { get; set; }
+        public DateTime? ContracExpired { get; set; }
+        public DateTime? DateStart { get; set; }
+        public DateTime? DateEnd { get; set; }
+        public DateTime? StartDate { get; set; }
+        public long? WorkingId { get; set; }
+        public string Avatar { get; set; }
+        public int? WorkStatusId { get; set; }
+    }
+    public class EmpPopupDTO : Pagings
+    {
+        public Int64? Id { get; set; }
+        public string Code { get; set; }
+        public string Fullname { get; set; }
+        public int? OrgId { get; set; }
+        public string OrgName { get; set; }
+        public string PositionName { get; set; }
+        public int? WorkStatusId { get; set; }
+        public DateTime? TerEffectDate { get; set; }
+    }
+    public class EmployeeInputImport
+    {
+        public string Code { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string OrgName { get; set; }
+        public string ItimeCode { get; set; }
+        public string Position { get; set; }
+        public string TaxCode { get; set; }
+        public string BirthDate { get; set; }
+        public string Gender { get; set; }
+        public string BirthPlace { get; set; }
+        public string SchoolId { get; set; } // Tên trường
+        public string QualificationId { get; set; } // Trình độ chuyên môn
+        public string LearningLevel { get; set; } // Trình độ học vấn
+        public string TrainingForm { get; set; } // Hình thức đào tạo
+        public string Language { get; set; }
+        public string IdNo { get; set; }
+        public string IdDate { get; set; }
+        public string IdPlace { get; set; }
+        public string Nationality { get; set; }
+        public string Native { get; set; }
+        public string Religion { get; set; }
+        public string MaritalStatus { get; set; }
+        public string Resident { get; set; }
+        public string CurProvince { get; set; }
+        public string CurDistrict { get; set; }
+        public string CurWard { get; set; }
+        public string CurAddress { get; set; }
+        public string Province { get; set; }
+        public string District { get; set; }
+        public string Ward { get; set; }
+        public string Address { get; set; }
+        public string MobilePhone { get; set; }
+        public string Email { get; set; }
+        public string WorkEmail { get; set; }
+        public string ContactPer { get; set; }
+        public string ContactPerPhone { get; set; }
+        public string PassNo { get; set; } // số hộ chiếu
+        public string PassDate { get; set; }
+        public string PassExpire { get; set; }
+        public string PassPlace { get; set; }
+        public string VisaNo { get; set; } // số visa
+        public string VisaDate { get; set; }
+        public string VisaExpire { get; set; }
+        public string VisaPlace { get; set; }
+        public string WorkPermit { get; set; } // so giay phep lao dong
+        public string WorkPermitDate { get; set; }
+        public string WorkPermitExpire { get; set; }
+        public string WorkPermitPlace { get; set; }
+        public string WorkNo { get; set; } // so cchn
+        public string WorkDate { get; set; }
+        public string WorkPlace { get; set; }
+        public string WorkScope { get; set; }
+        public string BankName { get; set; }
+        public string BankBranch { get; set; } // Chi nhánh Ngân hàng
+        public string BankNo { get; set; } // Số tài 
+    }
+
+    public class EmpImportParam
+    {
+        public List<EmployeeInputImport> Data { get; set; }
+    }
+    public class EmployeeFileImport
+    {
+        public IFormFile file { get; set; }
+    }
+
+    public class PaperInput
+    {
+        public int Id { get; set; }
+        public int EmpId { get; set; }
+        public int PaperId { get; set; }
+        public DateTime DateInput { get; set; }
+        public string Url { get; set; }
+        public string Note { get; set; }
+        public bool? StatusId { get; set; }// 1:miễn nộp
+    }
+    public class ListPaperView
+    {
+        public decimal? Id { get; set; }
+        public decimal? PaperId { get; set; }
+        public decimal? TypeId { get; set; }
+        public string PageName { get; set; }
+        public DateTime? DateInput { get; set; }
+        public bool? statusId { get; set; }
+        public string Url { get; set; }
+        public string Note { get; set; }
+    }
+
+    public class InfoView
+    {
+        public DateTime? Birth { get; set; }
+        public string TaxNo { get; set; }
+        public string InsureNo { get; set; }
+        public Int64 ContractTypeId { get; set; }
+        public string ContractTypeName { get; set; }
+        public decimal Seniority { get; set; }
+        public decimal? DayOff { get; set; }
+        public string FullName { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string Title { get; set; }
+        public string Link { get; set; }
+        public string MngName { get; set; }
+        public decimal? MngId { get; set; }
+
+    }
+    public class PhoneBookView
+    {
+        public string Code { get; set; }
+        public string FullName { get; set; }
+        public string BirthDay { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public string Avatar { get; set; }
+        public string TitleName { get; set; }
+        public string OgName { get; set; }
+        public string OrgName { get; set; }
+        public string Org2Name { get; set; }
+        public string MngName { get; set; }
+        public string Address { get; set; }
+        public Int64 EmployeeId { get; set; }
+        public decimal? Stt { get; set; }
+    }
+    public class EmployeeEditInput
+    {
+        public DateTime? BirthDate { get; set; }
+        public string BirthPlace { get; set; }
+        public int? MaritalStatusId { get; set; } // Tình trạng hôn 
+        public int? NationalityId { get; set; } // Quốc tịch
+        public int? NativeId { get; set; } // Dân tộc		
+        public int? ReligionId { get; set; } // Tôn giáo
+        public string IdNo { get; set; }
+        public DateTime? IdDate { get; set; }
+        public string IdPlace { get; set; }
+
+        // thường trú
+        public string Address { get; set; }
+        public int? ProvinceId { get; set; }
+        public int? DistrictId { get; set; }
+        public int? WardId { get; set; }
+        public string CurAddress { get; set; }
+        public int? CurProvinceId { get; set; }
+        public int? CurDistrictId { get; set; }
+        public int? CurWardId { get; set; }
+
+        // Phone, email
+        public string MobilePhone { get; set; }
+        public string WorkEmail { get; set; }
+        public string Email { get; set; }
+
+        // người liên hệ khi cần
+        public string ContactPer { get; set; }
+        public string ContactPerPhone { get; set; }
+    }
+    public class SituationEditDTO
+    {
+        [Required(ErrorMessage = "{0}_Required")]
+        public int? RelationshipId { get; set; }
+        [Required(ErrorMessage = "{0}_Required")]
+        public string Name { get; set; }
+        public string No { get; set; }
+        public string TaxNo { get; set; }
+        public string FamilyNo { get; set; }
+        public string FamilyName { get; set; }
+        public string Address { get; set; }
+        public DateTime? Birth { get; set; }
+        public DateTime? DateStart { get; set; }
+        public DateTime? DateEnd { get; set; }
+    }
+    public class EmployeeEditDTO : Pagings
+    {
+        public Int64? Id { get; set; }
+        public string Code { get; set; }
+        public string Fullname { get; set; }
+        public string Image { get; set; }
+        public int? OrgId { get; set; }
+        public int? StatusId { get; set; }
+        public string OrgName { get; set; }
+        public string PositionName { get; set; }
+        public string StatusName { get; set; }
+        public string UpdatedBy { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+    }
+    public class FamilyEditDTO : Pagings
+    {
+        public Int64? Id { get; set; }
+        public string Code { get; set; }
+        public string Fullname { get; set; }
+        public string Avatar { get; set; }
+        public int? OrgId { get; set; }
+        public string OrgName { get; set; }
+        public string PName { get; set; }
+        public string RelationName { get; set; }
+        public string StatusName { get; set; }
+        public string UpdatedBy { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public string Name { get; set; }
+        public DateTime? BirthDay { get; set; }
+        public string No { get; set; } // cmnd
+        public string TaxNo { get; set; } // ma so thue
+    }
+}

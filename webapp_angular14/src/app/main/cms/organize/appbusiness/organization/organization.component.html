@@ -1,0 +1,286 @@
+<div class="app-main-content">
+  <div class="app-container">
+    <!-- toolbar -->
+    <div class="app-toolbar">
+      <div class="card-full">
+        <!-- breadcrum-->
+        <div class="app-breadcrum">
+          <div class="brackcrum">
+            <i class="fa fa-sitemap" aria-hidden="true"></i>Hồ sơ <i
+              class="fa fa-angle-double-right" aria-hidden="true"></i>Thiết lập
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <span class="brackcrum-active" href='/cms/organize/business/organization'>Phòng ban</span>
+          </div>
+        </div>
+        <!-- toolbar -->
+        <div class="main-toolbar">
+          <button id="add" class="btn-action" (click)="clickToolbar(itemButton)"
+            *ngFor="let itemButton of toolbar"
+            [disabled]="itemButton.isDisable === true">
+            <p class="text-center"><i
+                class="fa {{itemButton.prefixIcon}} {{itemButton.iconColorClass}}"></i>
+            </p>
+            <p class="text-center">{{itemButton.text}}</p>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="app-content">
+      <ejs-splitter #horizontal width='100%'>
+        <e-panes>
+          <e-pane size='300px' min='30%' max='40%'>
+            <ng-template #content>
+              <div class="row">
+                <div class="col">
+                  <ejs-treeview #treeView (nodeSelected)="nodeSelecting($event!)" [allowDragAndDrop]='allowDragAndDrops'  (nodeDragStop)="onDragStop($event!)"
+                    [fields]='field'>
+                  </ejs-treeview>
+                </div>
+              </div>
+            </ng-template>
+          </e-pane>
+          <e-pane>
+            <ng-template #content>
+              <div class="card-center">
+                <form name="editForm" [formGroup]="editForm" novalidate>
+                  <div class="group-box" >
+                    <div class="card-head">
+                      <div class="icon-info histaff-icon"></div>
+                      <label class="title">Thông tin Quản lý</label>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="row">
+                        <div class="col-sm-4 l-h">
+                          <img [src]='model.avatar' class="img" style="width:148px; height: 148px ; border-radius:50%; object-fit: cover;" />
+                        </div>
+                        <div class="col-sm-8">
+                          <div class="form-group vertical">
+                            <label class="e-float-text required">Đơn vị cha</label>
+                            <input class="form-control" type="text" readonly
+                              formControlName="parentName" [(ngModel)]="model.parentName">
+                          </div>
+                          <div class="form-group vertical-flex">
+                            <label class="e-float-text ">Người quản
+                              lý</label>
+                            <input class="form-control" [ngModel]="model.mngName"
+                              formControlName="mngName" type="text" readonly>
+                            <div class="input-group-append">
+                              <button class="btn btn-search" type="button"
+                                (click)="choiseEmp()"></button>
+                            </div>
+                          </div>
+                          <div class="form-group vertical">
+                            <label class="e-float-text ">Chức vụ</label>
+                            <input class="form-control" type="text" readonly
+                              formControlName="posName" [(ngModel)]="model.posName" >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group-box" >
+                    <div class="card-head">
+                      <div class="icon-info histaff-icon"></div>
+                      <label class="title">Thông tin chi tiết</label>
+                    </div>
+                  
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="form-group vertical">
+                        <label class="e-float-text required">Mã</label>
+                        <input class="form-control" type="text"
+                          formControlName="code" [(ngModel)]="model.code"
+                          maxlength="31">
+                        <span class="input-error"
+                          *ngIf="editForm.get('code')!.hasError('required') && !editForm.get('code')!.untouched">
+                          Bắt buộc nhập
+                        </span>
+                        <span class="input-error "
+                          *ngIf="editForm.get('code')!.hasError('incorrect') && !editForm.get('code')!.untouched">
+                          Sai định dạng
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group vertical">
+                        <label class="e-float-text required">Tên đơn vị</label>
+                        <input class="form-control" type="text"
+                          formControlName="name" [(ngModel)]="model.name"
+                          maxlength="51">
+                        <span class="input-error"
+                          *ngIf="editForm.get('name')!.hasError('required') && !editForm.get('name')!.untouched">
+                          Bắt buộc nhập
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <!-- <div class="col-sm-6">
+                      <div class="form-group vertical">
+                        <label class="e-float-text required">Đơn vị
+                          cha</label>
+                        <ejs-dropdownlist [dataSource]='lstParentId'
+                          [fields]='fields' [showClearButton]="true"
+                          [(ngModel)]="model.parentId"
+                          formControlName="parentId" [placeholder]="''"
+                          [allowFiltering]='true'
+                          (filtering)='onFiltering($event,lstParentId)'>
+                        </ejs-dropdownlist>
+                        <span class="input-error"
+                          *ngIf="editForm.get('parentId')!.hasError('required') && !editForm.get('parentId')!.untouched">
+                          Bắt buộc chọn
+                        </span>
+                      </div>
+                    </div> -->
+                    <!-- mã nhân viên -->
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="form-group vertical">
+                        <label class="e-float-text">Ngày thành lập</label>
+                        <ejs-datepicker id="foundationDate" format="dd/MM/yyyy"
+                          [(ngModel)]="model.foundationDate"
+                          (keydown)="changeDate('foundationDate')"
+                          (blur)="changeDate('foundationDate')"
+                          formControlName="foundationDate"
+                          placeholder=".../.../...">
+                        </ejs-datepicker>
+                        <!-- <span class="input-error"
+                          *ngIf="editForm.get('foundationDate')!.hasError('required') && !editForm.get('foundationDate')!.untouched">
+                          Bắt buộc chọn
+                        </span> -->
+                        <span class="input-error"
+                          *ngIf="editForm.get('foundationDate')!.hasError('incorrect') && !editForm.get('foundationDate')!.untouched">
+                          Sai định dạng
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group vertical">
+                        <label class="e-float-text ">Ngày giải thể</label>
+                        <ejs-datepicker id="dissolveDate" format="dd/MM/yyyy"
+                          [(ngModel)]="model.dissolveDate"
+                          (keydown)="changeDateNoRequire('dissolveDate')"
+                          (blur)="changeDateNoRequire('dissolveDate')"
+                          formControlName="dissolveDate"
+                          placeholder=".../.../...">
+                        </ejs-datepicker>
+                        <span class="input-error"
+                          *ngIf="editForm.get('dissolveDate')!.hasError('incorrect') && !editForm.get('dissolveDate')!.untouched">
+                          Sai định dạng
+                        </span>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="form-group vertical">
+                        <label class="e-float-text ">Số điện
+                          thoại</label>
+                        <input class="form-control" type="text"
+                          formControlName="phone" [(ngModel)]="model.phone"
+                          maxlength="11">
+                        <span class="input-error "
+                          *ngIf="editForm.get('phone')!.hasError('incorrect') && !editForm.get('phone')!.untouched">
+                          Sai định dạng
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group vertical">
+                        <label class="e-float-text ">Fax</label>
+                        <input class="form-control" type="text"
+                          formControlName="fax" [(ngModel)]="model.fax"
+                          maxlength="50">
+                        <span class="input-error "
+                          *ngIf="editForm.get('fax')!.hasError('incorrect') && !editForm.get('fax')!.untouched">
+                          Sai định dạng
+                        </span>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="form-group vertical">
+                        <label class="e-float-text ">Số giấy phép
+                          kinh doanh</label>
+                        <input class="form-control" type="text"
+                          formControlName="businessNumber"
+                          [(ngModel)]="model.businessNumber" maxlength="50">
+                        <span class="input-error "
+                          *ngIf="editForm.get('businessNumber')!.hasError('incorrect') && !editForm.get('businessNumber')!.untouched">
+                          Sai định dạng
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group vertical">
+                        <label class="e-float-text ">Ngày
+                          cấp giấy phép kinh doanh</label>
+                        <ejs-datepicker id="businessDate" format="dd/MM/yyyy"
+                          [(ngModel)]="model.businessDate"
+                          (keydown)="changeDateNoRequire('businessDate')"
+                          (blur)="changeDateNoRequire('businessDate')"
+                          formControlName="businessDate"
+                          placeholder=".../.../...">
+                        </ejs-datepicker>
+                        <span class="input-error"
+                          *ngIf="editForm.get('businessDate')!.hasError('incorrect') && !editForm.get('businessDate')!.untouched">
+                          Sai định dạng
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group vertical">
+                        <label class="e-float-text ">Mã số thuế</label>
+                        <input class="form-control" type="text"
+                          formControlName="taxCode" [(ngModel)]="model.taxCode">
+                        <span class="input-error"
+                          *ngIf="editForm.get('taxCode')!.hasError('required') && !editForm.get('taxCode')!.untouched">
+                          Sai định dạng
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group vertical">
+                        <label class="e-float-text ">Địa
+                          chỉ</label>
+                        <textarea class="form-control" formControlName="address"
+                          [(ngModel)]="model.address" id="textarea"
+                          rows="2"></textarea>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group vertical">
+                        <label class="e-float-text ">Chức năng - nhiệm vụ</label>
+                        <textarea class="form-control" formControlName="note" [(ngModel)]="model.note"
+                          id="note" rows="2"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </form>
+              </div>
+            
+            </ng-template>
+          </e-pane>
+        </e-panes>
+      </ejs-splitter>
+    </div>
+  </div>
+</div>
+<!-- search employee -->
+<cms-app-modalsemp id="cms-app-modalsemp">
+</cms-app-modalsemp>
+<gohr-confirm-modal id="confirm-delete-modal">
+  <div class="row full-width gohr-modal-header">
+    Bạn có chắc chắn muốn xóa không ?
+  </div>
+  <div class="row full-width gohr-modal-footer text-center">
+    <button class="btn btn-primary" (click)="confirmDelete('ok')">Đồng
+      ý</button>
+    <button class="btn btn-default"
+      (click)="confirmDelete('cancel')">Hủy</button>
+  </div>
+</gohr-confirm-modal>

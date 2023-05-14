@@ -1,0 +1,282 @@
+<div class="nav-header bg-white shadow-xs border-0">
+    <div class="nav-top">
+        <a routerLink="/home"><i class="text-success display2-size me-2 ms-0">
+                <img class="logo-img" src="../../../assets/images/Logo HiStaff - Anh.png" alt='Histaff icon'
+                    width="200" />
+            </i>
+        </a>
+        <a [routerLink]="moduleRouterLink" class="mob-menu ms-auto me-2 chat-active-btn"><i #mobButton
+                class="feather-command btn-round-md module font-xl"></i></a>
+
+        <a routerLink="/defaultvideo" class="mob-menu me-2 mob-extend"><i
+                class="feather-video text-grey-900 font-sm btn-round-md bg-greylight mob-extend"></i></a>
+
+        <span (click)="toggleActive()" class="me-2 menu-search-icon mob-menu mob-extend"><i
+                class="feather-search text-grey-900 font-sm btn-round-md bg-greylight mob-extend"></i></span>
+        <button (click)="toggleOpen()" [class]="'nav-menu me-0 ms-2' + buttonClass"></button>
+    </div>
+    <a [routerLink]="moduleRouterLink"
+        [class]="'pointer p-2 text-center ms-3 menu-icon chat-active-btn module-wrapper'">
+        <i #webButton class="feather-command font-xl module"></i>
+
+    </a>
+    <div #searcher class="header-search">
+        <div class="form-group mb-0 icon-input">
+            <i class="feather-search font-sm text-grey-400"></i>
+            <input type="text" [(ngModel)]="keyword" placeholder="Tìm kiếm"
+                class="bg-grey border-0 lh-32 pt-2 pb-2 ps-5 pe-3 font-xssss fw-500 rounded-xl w-100 theme-dark-bg" />
+        </div>
+    </div>
+
+    <!--
+    <a routerLink="/home" class="p-2 text-center ms-3 menu-icon center-menu-icon"><i
+            class="feather-home font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500"></i></a>
+    <a routerLink="/defaultstorie" class="p-2 text-center ms-0 menu-icon center-menu-icon"><i
+            class="feather-zap font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500 "></i></a>
+    <a routerLink="/defaultvideo" class="p-2 text-center ms-0 menu-icon center-menu-icon"><i
+            class="feather-video font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500 "></i></a>
+    <a routerLink="/defaultgroup" class="p-2 text-center ms-0 menu-icon center-menu-icon"><i
+            class="feather-user font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500 "></i></a>
+    <a routerLink="/shop2" class="p-2 text-center ms-0 menu-icon center-menu-icon"><i
+            class="feather-shopping-bag font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500 "></i></a>
+    -->
+
+    <div class="top-right-icons">
+        <span class="p-2 pointer text-center ms-auto menu-icon"><i
+                class="feather-home font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500"></i></span>
+
+        <span [class]="'p-2 pointer text-center ms-auto menu-icon' + notiClass" id="dropdownMenu3"
+            data-bs-toggle="dropdown" aria-expanded="false" (click)="toggleIsNoti()">
+            <div class="noti-icon-wrapper">
+                <i class="feather-bell font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500">
+                </i>
+                <span class="notification-badge bg-notification-badge"><label>12</label></span>
+            </div>
+        </span>
+        <div [class]="'dropdown-menu p-4 right-0 rounded-xxxl border-0 shadow-lg' + notiClass"
+            aria-labelledby="dropdownMenu3">
+            <h4 class="fw-700 font-xss mb-4">Notification</h4>
+            <div class="card bg-transparent-card w-100 border-0 ps-5 mb-3">
+                <img [src]="randomAvatarSrc" alt="user" class="w40 position-absolute left-0" />
+                <h5 class="font-xsss text-grey-900 mb-1 mt-0 fw-700 d-block">Hendrix Stamp <span
+                        class="text-grey-400 font-xsssss fw-600 float-right mt-1"> 3 min</span></h5>
+                <h6 class="text-grey-500 fw-500 font-xssss lh-4">There are many variations of pass..</h6>
+            </div>
+            <div class="card bg-transparent-card w-100 border-0 ps-5 mb-3">
+                <img [src]="randomAvatarSrc" alt="user" class="w40 position-absolute left-0" />
+                <h5 class="font-xsss text-grey-900 mb-1 mt-0 fw-700 d-block">Goria Coast <span
+                        class="text-grey-400 font-xsssss fw-600 float-right mt-1"> 2 min</span></h5>
+                <h6 class="text-grey-500 fw-500 font-xssss lh-4">Mobile Apps UI Designer is require..</h6>
+            </div>
+
+            <div class="card bg-transparent-card w-100 border-0 ps-5 mb-3">
+                <img [src]="randomAvatarSrc" alt="user" class="w40 position-absolute left-0" />
+                <h5 class="font-xsss text-grey-900 mb-1 mt-0 fw-700 d-block">Surfiya Zakir <span
+                        class="text-grey-400 font-xsssss fw-600 float-right mt-1"> 1 min</span></h5>
+                <h6 class="text-grey-500 fw-500 font-xssss lh-4">Mobile Apps UI Designer is require..</h6>
+            </div>
+            <div class="card bg-transparent-card w-100 border-0 ps-5">
+                <img [src]="randomAvatarSrc" alt="user" class="w40 position-absolute left-0" />
+                <h5 class="font-xsss text-grey-900 mb-1 mt-0 fw-700 d-block">Victor Exrixon <span
+                        class="text-grey-400 font-xsssss fw-600 float-right mt-1"> 30 sec</span></h5>
+                <h6 class="text-grey-500 fw-500 font-xssss lh-4">Mobile Apps UI Designer is require..</h6>
+            </div>
+        </div>
+        <!--
+        <app-darkbutton></app-darkbutton>
+        -->
+        <a routerLink="/defaultsettings" class="p-0 ms-3 menu-icon">
+            <div class="flex-center w50 h50">
+                <img [src]="avatar" alt="user" class="w50 rounded-circle" />
+            </div>
+        </a>
+    </div>
+
+
+    <nav [class]="'navigation scroll-bar' + navClass">
+        <div class="container ps-0 pe-0">
+            <div class="nav-content">
+                <div class="nav-wrap bg-white bg-transparent-card rounded-xxxl shadow-xss pt-3 pb-1 mb-2 mt-2">
+                    <!-- <div class="nav-caption fw-600 font-xssss text-grey-500"><span>New </span>Feeds</div> -->
+                    <ul class="mb-3 top-content1">
+                        <li class="logo d-none d-xl-block d-lg-block"></li>
+                        <li (click)="handleCloseHeader()"><a routerLink="/home" class="nav-content-bttn open-font"><i
+                                    class="feather-grid btn-space-md bg-blue-gradiant1 me-2"></i><span>Dashboard</span></a>
+                        </li>
+                        <li (click)="handleCloseHeader()"><a routerLink="/defaultsettings"
+                                class="nav-content-bttn open-font"><i
+                                    class="feather-user btn-space-md bg-red-gradiant1 me-2"></i><span>My
+                                    Profile</span></a>
+                        </li>
+                        <li (click)="handleCloseHeader()"><a routerLink="/defaultgroup"
+                                class="nav-content-bttn open-font"><i
+                                    class="feather-users btn-space-md bg-gold-gradiant1 me-2"></i><span>My
+                                    Team</span></a></li>
+                        <li (click)="handleCloseHeader()"><a routerLink="/defaultgroup"
+                                class="nav-content-bttn open-font"><i
+                                    class="feather-clock btn-space-md bg-mini-gradiant1 me-2"></i><span>Time &
+                                    Attendance</span></a></li>
+                        <li (click)="handleCloseHeader()"><a routerLink="/register"
+                                class="nav-content-bttn open-font"><i
+                                    class="feather-edit btn-space-md bg-primary-gradiant1 me-2"></i><span>Register
+                                </span></a></li>
+                        <li (click)="handleCloseHeader()"><a routerLink="/benefit" class="nav-content-bttn open-font"><i
+                                    class="feather-gift btn-space-md bg-primary-gradiant1 me-2"></i><span>Benefit
+                                </span></a></li>
+                        <li (click)="handleCloseHeader()"><a routerLink="/carreer-path"
+                                class="nav-content-bttn open-font"><i
+                                    class="feather-trending-up btn-space-md bg-primary-gradiant1 me-2"></i><span>My
+                                    Career Path
+                                </span></a></li>
+                        <li (click)="handleCloseHeader()"><a routerLink="/course" class="nav-content-bttn open-font"><i
+                                    class="feather-award btn-space-md bg-primary-gradiant1 me-2"></i><span>My Course
+                                </span></a></li>
+                        <li (click)="handleCloseHeader()"><a routerLink="/performance"
+                                class="nav-content-bttn open-font"><i
+                                    class="feather-bar-chart btn-space-md bg-primary-gradiant1 me-2"></i><span>My
+                                    Performance
+                                </span></a></li>
+
+
+                    </ul>
+                </div>
+
+                <div class="nav-wrap bg-white bg-transparent-card rounded-xxxl shadow-xss pt-3 pb-1 mb-2 mt-2">
+                    <ul class="mb-3">
+                        <li (click)="toggleOpen()">
+                            <a routerLink="/days-of-leave" class="nav-content-bttn open-font">
+                                <div class="btn-square-md bg-greenlight me-2"><label>P</label></div>
+                                <span>Số ngày phép còn</span><span class="oval-count bg-redlight mt-1">{{ 10 }}</span>
+                            </a>
+                        </li>
+                        <li (click)="toggleOpen()">
+                            <a routerLink="/times-of-late" class="nav-content-bttn open-font">
+                                <div class="btn-square-md bg-redlight me-2"><label>M</label></div>
+                                <span>Số lần đi muộn</span><span class="oval-count bg-redlight mt-1">{{ 2 }}</span>
+                            </a>
+                        </li>
+                        <li (click)="toggleOpen()">
+                            <a routerLink="/times-of-late" class="nav-content-bttn open-font">
+                                <div class="btn-square-md bg-orangelight me-2"><label>N</label></div>
+                                <span>Số lần nghỉ trong tháng</span><span class="oval-count bg-graylight mt-1">{{ 0
+                                    }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-wrap bg-white bg-transparent-card rounded-xxxl shadow-xss pt-3 pb-1 mb-2 mt-2">
+                    <div class="nav-caption fw-600 font-xssss text-grey-500"><span>Công việc </span>của tôi</div>
+                    <app-task-reminder [tasks]="myTasks"></app-task-reminder>
+                </div>
+
+                <!--
+                <div *ngIf="!!activeModule"
+                    class="nav-wrap bg-white bg-transparent-card rounded-xxxl shadow-xss pt-3 pb-1 mb-2 mt-2">
+                    <div class="nav-caption fw-600 font-xssss text-grey-500">{{ activeModule.code }}</div>
+                    <ul class="mb-3">
+                        <li *ngFor="let f of activeModule.features; let index=index" (click)="toggleOpen()">
+
+                            <a [routerLink]="'/'+ activeModule.routerLink + '/' + f.routerLink"
+                                class="nav-content-bttn open-font">
+                                <i
+                                    [class]="f.iconClass + ' btn-round-md me-2 ' + bgClass(activeModule.index, index)"></i>
+                                <span>{{ f.code }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-wrap bg-white bg-transparent-card rounded-xxxl shadow-xss pt-3 pb-1 mb-2">
+                    <div class="nav-caption fw-600 font-xssss text-grey-500"><span>Test </span>Modules</div>
+                    <ul class="mb-3">
+                        <li (click)="toggleOpen()" *ngIf="!authService.serverModel.modelName.includes('MiukaFoto')"><a
+                                routerLink="/project-manager-center" class="nav-content-bttn open-font"><i
+                                    class="font-xl text-current feather-book-open me-2"></i><span>Project
+                                    Manager</span><span class="circle-count bg-warning mt-1">{{ 101 }}</span></a></li>
+                        <li (click)="toggleOpen()" *ngIf="authService.serverModel.modelName.includes('MiukaFoto')"><a
+                                routerLink="/article-center" class="nav-content-bttn open-font"><i
+                                    class="font-xl text-current feather-book-open me-2"></i><span>Articles</span><span
+                                    class="circle-count bg-warning mt-1">{{ articles.total_row }}</span></a></li>
+                        <li (click)="toggleOpen()" *ngIf="!authService.serverModel.modelName.includes('MiukaFoto')"><a
+                                routerLink="/profile-center" class="nav-content-bttn open-font"><i
+                                    class="font-xl text-current feather-layout me-2"></i><span>Profile</span></a></li>
+                        <li (click)="toggleOpen()" *ngIf="authService.serverModel.modelName.includes('MiukaFoto')"><a
+                                routerLink="/mcc-demo" class="nav-content-bttn open-font"><i
+                                    class="font-xl text-current feather-archive me-2"></i><span>Multiple column combox
+                                    (demo)</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-wrap bg-white bg-transparent-card rounded-xxxl shadow-xss pt-3 pb-1 mb-2">
+                    <div class="nav-caption fw-600 font-xssss text-grey-500"><span>More </span>Pages</div>
+                    <ul class="mb-3">
+                        <li (click)="handleCloseHeader()"><a routerLink="/defaultemailbox"
+                                class="nav-content-bttn open-font"><i
+                                    class="font-xl text-current feather-inbox me-2"></i><span>Email Box</span><span
+                                    class="circle-count bg-warning mt-1">584</span></a></li>
+                        <li (click)="handleCloseHeader()"><a routerLink="/defaulthotel"
+                                class="nav-content-bttn open-font"><i
+                                    class="font-xl text-current feather-home me-2"></i><span>Near Hotel</span></a></li>
+                        <li (click)="handleCloseHeader()"><a routerLink="/defaultevent"
+                                class="nav-content-bttn open-font"><i
+                                    class="font-xl text-current feather-map-pin me-2"></i><span>Latest Event</span></a>
+                        </li>
+                        <li (click)="handleCloseHeader()"><a routerLink="/defaultlive"
+                                class="nav-content-bttn open-font"><i
+                                    class="font-xl text-current feather-youtube me-2"></i><span>Live Stream</span></a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-wrap bg-white bg-transparent-card rounded-xxxl shadow-xss pt-3 pb-1 mb-2">
+                    <div class="nav-caption fw-600 font-xssss text-grey-500"><span></span> Account</div>
+                    <ul class="mb-1">
+                        <li class="logo d-none d-xl-block d-lg-block"></li>
+                        <li (click)="handleCloseHeader()"><a routerLink="/defaultsettings"
+                                class="nav-content-bttn open-font h-auto pt-2 pb-2"><i
+                                    class="font-sm feather-settings me-2 text-grey-500"></i><span>Settings</span></a>
+                        </li>
+                        <li (click)="handleCloseHeader()"><a routerLink="/defaultanalytics"
+                                class="nav-content-bttn open-font h-auto pt-2 pb-2"><i
+                                    class="font-sm feather-pie-chart me-2 text-grey-500"></i><span>Analytics</span></a>
+                        </li>
+                        <li (click)="handleCloseHeader()"><a routerLink="/defaultmessage"
+                                class="nav-content-bttn open-font h-auto pt-2 pb-2"><i
+                                    class="font-sm feather-message-square me-2 text-grey-500"></i><span>Chat</span><span
+                                    class="circle-count bg-warning mt-0">23</span></a></li>
+                    </ul>
+                </div>
+                <div class="nav-wrap bg-white bg-transparent-card rounded-xxxl shadow-xss pt-3 pb-1">
+                    <div class="nav-caption fw-600 font-xssss text-grey-500"><span></span> Admin</div>
+                    <ul class="mb-1">
+                        <li class="logo d-none d-xl-block d-lg-block"></li>
+                        <li (click)="handleCloseHeader()"><a routerLink="/developer"
+                                class="nav-content-bttn open-font h-auto pt-2 pb-2"><i
+                                    class="font-sm feather-info me-2 text-grey-500"></i><span>Developer</span></a></li>
+                        <li (click)="handleCloseHeader()"><a routerLink="/learnrxjs"
+                                class="nav-content-bttn open-font h-auto pt-2 pb-2"><i
+                                    class="font-sm feather-info me-2 text-grey-500"></i><span>Learn RxJS</span></a></li>
+                    </ul>
+                </div>
+                -->
+
+            </div>
+        </div>
+    </nav>
+
+    <div [class]="'app-header-search' + searchClass">
+        <form class="search-form">
+            <div class="form-group searchbox mb-0 border-0 p-1">
+                <input type="text" class="form-control border-0" placeholder="Search..." [(ngModel)]="keyword"
+                    name="keyword" />
+                <i class="input-icon">
+
+                </i>
+                <span class="ms-1 mt-1 d-inline-block close searchbox-close">
+                    <i class="ti-close font-xs" (click)="toggleActive()"></i>
+                </span>
+            </div>
+        </form>
+    </div>
+</div>

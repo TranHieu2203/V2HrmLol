@@ -1,0 +1,17 @@
+<app-waitting-screen *ngIf="refreshingToken"></app-waitting-screen>
+
+<section>
+    <app-header></app-header>
+    <!-- <app-leftnav></app-leftnav> -->
+    <app-rightchat></app-rightchat>
+    <router-outlet name="ppMain"></router-outlet>
+    <router-outlet name="developer"></router-outlet>
+</section>
+
+<div #outlet>
+    <router-outlet></router-outlet>
+</div>
+
+<section>
+    <app-appfooter></app-appfooter>
+</section>

@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="RestAPI\**" />
+    <Content Remove="RestAPI\**" />
+    <EmbeddedResource Remove="RestAPI\**" />
+    <None Remove="RestAPI\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Extensions\SubdomainRoute.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.7.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+    <PackageReference Include="Oracle.EntityFrameworkCore" Version="2.19.30" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AttendanceAPI\AttendanceAPI.csproj" />
+    <ProjectReference Include="..\AttendanceDAL\AttendanceDAL.csproj" />
+    <ProjectReference Include="..\CoreAPI\CoreAPI.csproj" />
+    <ProjectReference Include="..\GoHR.Core\CoreDAL.csproj" />
+    <ProjectReference Include="..\PayrollAPI\PayrollAPI.csproj" />
+    <ProjectReference Include="..\PayrollDAL\PayrollDAL.csproj" />
+    <ProjectReference Include="..\ProfileAPI\ProfileAPI.csproj" />
+    <ProjectReference Include="..\ProfileDAL\ProfileDAL.csproj" />
+  </ItemGroup>
+
+</Project>

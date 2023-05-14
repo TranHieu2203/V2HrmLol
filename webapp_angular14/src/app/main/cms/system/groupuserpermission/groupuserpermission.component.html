@@ -1,0 +1,150 @@
+<div class="app-main-content">
+  <div class="app-container">
+    <div class="app-toolbar">
+      <div class="card-full">
+        <!-- breadcrum-->
+        <div class="app-breadcrum">
+          <div class="brackcrum">
+            <i class="fa fa-sitemap" aria-hidden="true"></i>Hệ thống
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <span class="brackcrum-active" href='/cms/system/upermission'>Phân
+              quyền nhóm tài
+              khoản</span>
+          </div>
+        </div>
+        <!-- toolbar -->
+        <app-common-tools name="groupuserpermission" [items$]="toolItems$" (toolItemClicked)="clickToolbar($event)"></app-common-tools>
+      </div>
+    </div>
+
+    <div class="app-content">
+      <div class="row">
+        <div class="col-sm-2 b-r">
+          <div>
+            <ejs-maskedtextbox #maskObj placeholder="Tìm kiếm..." id="search" (change)="searchNodes($event!)">
+            </ejs-maskedtextbox>
+            <ejs-treeview #listTreeObj id="default" [fields]='field' (nodeSelected)="userSelecting($event!)">
+            </ejs-treeview>
+          </div>
+        </div>
+        <div class="col-sm-10 p-l0">
+          <ul class="nav nav-tabs group-filter" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a (click)="changetab(1)" class="nav-link active" id="home-tab" data-toggle="tab" href="#home"
+                role="tab">Phân
+                quyền
+                chức năng</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a (click)="changetab(2)" class="nav-link" id="profile-tab" data-toggle="tab" href="#profile"
+                role="tab">Phân quyền sơ
+                đồ tổ chức</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home">
+              <ejs-grid #overviewgrid id='overviewgrid' [dataSource]='data' (dataStateChange)="dataStateChange($event!)"
+                rowHeight='40' headerHeight='52' [height]='configs.height()-30' [allowPaging]='true'
+                [pageSettings]='configs.pageSettings' [enableHover]='true' [allowSorting]='false' allowResizing='true'
+                [locale]='configs.currentLang'>
+                <e-columns>
+                  <e-column field='userGroupId' [visible]='false'>
+                  </e-column>
+                  <e-column field='userId' [visible]='false'>
+                  </e-column>
+                  <e-column field='functionId' [visible]='false'>
+                  </e-column>
+                  <e-column field='groupFuntionId' [visible]='false'>
+                  </e-column>
+                  <!--  -->
+                  <e-column width="60" eaderTextAlign="Center" textAlign="Center" headerText="STT"
+                    clipMode="EllipsisWithTooltip">
+                    <ng-template #template let-data>
+                      <span>{{ formatStt(data.index) }}</span>
+                    </ng-template>
+                  </e-column>
+
+                  <e-column field='functionName' headerTextAlign="Center" textAlign="Left" headerText="Tên Chức năng"
+                    clipMode='EllipsisWithTooltip' width="110">
+                  </e-column>
+                  <e-column field='groupFunctionName' headerTextAlign="Center" textAlign="Left"
+                    headerText="Tên Nhóm chức năng" clipMode='EllipsisWithTooltip' width="110">
+                  </e-column>
+                  <e-column field='moduleName' headerTextAlign="Center" textAlign="Left" headerText="Tên Module"
+                    clipMode='EllipsisWithTooltip' width="110"></e-column>
+                  <!--  -->
+                  <e-column [isPrimaryKey]='true' width="70" field='isAll' textAlign="Center" headerText="All">
+                    <ng-template #template let-data>
+                      <ejs-checkbox [ngModel]="data.isAll" (change)="check(data, 'isAll',$event)">
+                      </ejs-checkbox>
+                    </ng-template>
+                  </e-column>
+                  <e-column [isPrimaryKey]='true' width="70" field='isView' textAlign="Center" headerText="Xem">
+                    <ng-template #template let-data>
+                      <ejs-checkbox [ngModel]="data.isView" (change)="check(data, 'isView',$event)">
+                      </ejs-checkbox>
+                    </ng-template>
+                  </e-column>
+                  <e-column [isPrimaryKey]='true' width="70" field='isAdd' textAlign="Center" headerText="Thêm">
+                    <ng-template #template let-data>
+                      <ejs-checkbox [ngModel]="data.isAdd" (change)="check(data, 'isAdd',$event)">
+                      </ejs-checkbox>
+                    </ng-template>
+                  </e-column>
+                  <e-column [isPrimaryKey]='true' width="70" field='isEdit' textAlign="Center" headerText="Sửa">
+                    <ng-template #template let-data>
+                      <ejs-checkbox [ngModel]="data.isEdit" (change)="check(data, 'isEdit',$event)">
+                      </ejs-checkbox>
+                    </ng-template>
+                  </e-column>
+                  <e-column [isPrimaryKey]='true' width="70" field='isDelete' textAlign="Center" headerText="Xóa">
+                    <ng-template #template let-data>
+                      <ejs-checkbox [ngModel]="data.isDelete" (change)="check(data,'isDelete',$event)">
+                      </ejs-checkbox>
+                    </ng-template>
+                  </e-column>
+                  <e-column [isPrimaryKey]='true' width="70" field='isLock' textAlign="Center" headerText="Khóa/Mở">
+                    <ng-template #template let-data>
+                      <ejs-checkbox [ngModel]="data.isLock" (change)="check(data,'isLock',$event)">
+                      </ejs-checkbox>
+                    </ng-template>
+                  </e-column>
+                  <e-column [isPrimaryKey]='true' width="70" field='isSum' textAlign="Center"
+                    headerText="Tổng hợp công">
+                    <ng-template #template let-data>
+                      <ejs-checkbox [ngModel]="data.isSum" (change)="check(data,'isSum',$event)">
+                      </ejs-checkbox>
+                    </ng-template>
+                  </e-column>
+                  <e-column [isPrimaryKey]='true' width="70" field='isCal' textAlign="Center" headerText="Tính lương">
+                    <ng-template #template let-data>
+                      <ejs-checkbox [ngModel]="data.isCal" (change)="check(data,'isCal',$event)">
+                      </ejs-checkbox>
+                    </ng-template>
+                  </e-column>
+                  <e-column [isPrimaryKey]='true' width="70" field='isImport' textAlign="Center" headerText="Import">
+                    <ng-template #template let-data>
+                      <ejs-checkbox [ngModel]="data.isImport" (change)="check(data,'isImport',$event)">
+                      </ejs-checkbox>
+                    </ng-template>
+                  </e-column>
+                  <e-column [isPrimaryKey]='true' width="70" field='isExport' textAlign="Center" headerText="Export">
+                    <ng-template #template let-data>
+                      <ejs-checkbox [ngModel]="data.isExport" (change)="check(data,'isExport',$event)">
+                      </ejs-checkbox>
+                    </ng-template>
+                  </e-column>
+                </e-columns>
+              </ejs-grid>
+            </div>
+            <div class="tab-pane fade" id="profile">
+              <ejs-treeview #treeView [fields]='field2' [showCheckBox]='showCheckBox'>
+              </ejs-treeview>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

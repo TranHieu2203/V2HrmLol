@@ -1,0 +1,181 @@
+<div class="app-main-content">
+  <div class="app-container">
+    <!-- toolbar -->
+    <div class="app-toolbar">
+      <div class="card-full">
+        <!-- breadcrum-->
+        <div class="app-breadcrum">
+          <div class="brackcrum">
+            <i class="fa fa-sitemap" aria-hidden="true"></i>Hồ sơ <i class="fa fa-angle-double-right"
+              aria-hidden="true"></i>Nghiệp vụ
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <span class="brackcrum-active" href='/cms/profile/business/shiftsort'>Hồ sơ nhân viên</span>
+          </div>
+        </div>
+        <!-- toolbar -->
+        <app-common-tools name="companyinfo" [items$]="toolItems$" (toolItemClicked)="clickToolbar($event)"></app-common-tools>
+      </div>
+    </div>
+
+    <div class="app-content">
+      <ejs-splitter #splitterInstance id="nested-splitter" (created)='onCreated()' height='100%' width='100%'>
+        <e-panes>
+          <e-pane size='270px' max='40%'>
+            <ng-template #content>
+              <div id='vertical_splitter' class="vertical_splitter">
+                <div>
+                  <div class="content">
+                    <cms-app-org></cms-app-org>
+                  </div>
+                </div>
+                <div>
+                  <div class="content content-checkbox">
+                    <ejs-checkbox label="Cả nhân viên nghỉ việc" (change)="GetEmp($event!)" [checked]="false">
+                    </ejs-checkbox>
+                    <div class="bg-ter"></div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </e-pane>
+          <e-pane>
+            <ng-template #content>
+              <div class="list-grid">
+                <ejs-grid #overviewgrid id='overviewgrid' [dataSource]='data | async' showColumnMenu='true'
+                  (dataStateChange)="dataStateChange($event!)" [rowHeight]='gridRowHeight' headerHeight='40'
+                  [height]='configs.height()' [allowPaging]='true' [pageSettings]='configs.pageSettings'
+                  [enableHover]='true' (recordDoubleClick)="viewRecord($event!)" [allowSorting]='true'
+                  allowResizing='true' [locale]='configs.currentLang' [allowSelection]='true' [showColumnChooser]='true'
+                  [selectionSettings]='configs.selectionSettings' [editSettings]='configs.editSettings'
+                  (rowSelecting)="setButtonStatus($event!)" (rowDeselecting)="setButtonStatus($event!)"
+                  [allowFiltering]='true' [allowExcelExport]='true'>
+                  <e-columns>
+                    <e-column type='checkbox' [showInColumnChooser]='false' [allowFiltering]='false'
+                      [allowSorting]='false' width='50' textAlign="Center" [allowEditing]="false">
+                    </e-column>
+                    <e-column field='id' [showInColumnChooser]='false' [visible]='false' headerText='ID'
+                      [isPrimaryKey]='true' [allowEditing]="false">
+                    </e-column>
+                    <e-column field='orgName' headerTextAlign="Left" textAlign="Left" headerText="Tên đơn vị"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='orgCode' headerTextAlign="Left" textAlign="Left" headerText="Mã công ty"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='nameVN' headerTextAlign="Left" textAlign="Left" headerText="Tên tiếng Việt"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='nameEN' headerTextAlign="Left" textAlign="Left" headerText="Tên tiếng Anh"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='regionName' headerTextAlign="Left" textAlign="Left" headerText="Vùng"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='gpkdAddress' headerTextAlign="Left" textAlign="Left" headerText="Địa chỉ theo GPKD"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='phoneNumber' headerTextAlign="Left" textAlign="Left" headerText="Số điện thoại"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='workAddress' headerTextAlign="Left" textAlign="Left" headerText="Địa điểm làm việc"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='provinceName' headerTextAlign="Left" textAlign="Left" headerText="Tỉnh/Thành phố"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='districtName' headerTextAlign="Left" textAlign="Left" headerText="Quận/Huyện"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='wardName' headerTextAlign="Left" textAlign="Left" headerText="Xã/Phường"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='insUnitName' headerTextAlign="Left" textAlign="Left" headerText="Đơn vị đóng BH"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='bankAccount' headerTextAlign="Left" textAlign="Left" headerText="Số tài khoản"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='bankName' headerTextAlign="Left" textAlign="Left" headerText="Ngân hàng"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='bankBranch' headerTextAlign="Left" textAlign="Left" headerText="Chi nhánh ngân hàng"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='pitCode' headerTextAlign="Left" textAlign="Left" headerText="Mã số thuế"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='pitCodeChange' headerTextAlign="Left" textAlign="Left" headerText="Lần thay đổi MST thứ"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='pitCodeDate' headerTextAlign="Center" textAlign="Center"
+                      headerText="Ngày cấp MST" clipMode='EllipsisWithTooltip' width='115'></e-column>
+                    <e-column field='representativeName' headerTextAlign="Left" textAlign="Left" headerText="Người đại diện pháp luật"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='signName' headerTextAlign="Left" textAlign="Left" headerText="Người đại diện ký HĐLĐ"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='gpkdNo' headerTextAlign="Left" textAlign="Left" headerText="Số giấy phép kinh doanh"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='gpkdDate' headerTextAlign="Center" textAlign="Center"
+                      headerText="Ngày đăng ký" clipMode='EllipsisWithTooltip' width='115'></e-column>
+                    <e-column field='website' headerTextAlign="Left" textAlign="Left" headerText="Website"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='fax' headerTextAlign="Left" textAlign="Left" headerText="Fax"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='note' headerTextAlign="Left" textAlign="Left" headerText="Ghi chú"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='isActiveName' headerTextAlign="Center" textAlign="Center" headerText="Trạng thái"
+                      clipMode='EllipsisWithTooltip' width='127'>
+                      <ng-template #template let-data>
+                        <div class="row-status full-width">
+                          <div class="status-effect text-center" *ngIf="data.isActive == 1 ">
+                            <span>Hiệu lực</span>
+                          </div>
+                          <div class="status-not-effect text-center" *ngIf="data.isActive == 0">
+                            <span>Hết hiệu lực</span>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </e-column>
+                  </e-columns>
+                </ejs-grid>
+              </div>
+            </ng-template>
+          </e-pane>
+        </e-panes>
+      </ejs-splitter>
+
+    </div>
+
+  </div>
+</div>
+
+<input id="file" type="file" name="name"
+  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+  style="display: none;" (change)='inputFile($event!)' />
+<gohr-confirm-modal id="confirm-import-modal">
+  <div class="row full-width gohr-modal-header">
+    Xác nhận Import
+  </div>
+  <div class="row full-width gohr-modal-footer text-center">
+    <button class="btn btn-primary" (click)="confirmImport('ok')">Đồng
+      ý</button>
+    <button class="btn btn-default" (click)="confirmImport('cancel')">Hủy</button>
+  </div>
+</gohr-confirm-modal>
+
+<gohr-confirm-modal id="confirm-delete-modal">
+  <div class="row full-width gohr-modal-header">
+    Bạn có chắc chắn muốn xóa không ?
+  </div>
+  <div class="row full-width gohr-modal-footer text-center">
+    <button class="btn btn-primary" (click)="confirmDelete('ok')">Đồng
+      ý</button>
+    <button class="btn btn-default" (click)="confirmDelete('cancel')">Hủy</button>
+  </div>
+</gohr-confirm-modal>

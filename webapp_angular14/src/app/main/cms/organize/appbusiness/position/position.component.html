@@ -1,0 +1,115 @@
+<div class="app-main-content">
+  <div class="app-container">
+    <!-- toolbar -->
+    <div class="app-toolbar">
+      <div class="card-full">
+        <!-- breadcrum-->
+        <div class="app-breadcrum">
+          <div class="brackcrum">
+            <i class="fa fa-sitemap" aria-hidden="true"></i>Hồ sơ <i class="fa fa-angle-double-right"
+              aria-hidden="true"></i>Danh mục
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <span class="brackcrum-active" href='/cms/organize/business/position'>Vị trí</span>
+          </div>
+        </div>
+        <!-- toolbar -->
+        <app-common-tools name="position" [items$]="toolItems$" (toolItemClicked)="clickToolbar($event)"></app-common-tools>
+      </div>
+    </div>
+    <div class="app-content">
+      <ejs-splitter #splitterInstance id="nested-splitter" (created)='onCreated()' height='100%' width='100%'>
+        <e-panes>          
+          <e-pane size='270px' max='40%'>
+            <ng-template #content>
+              <div id='vertical_splitter' class="vertical_splitter">
+                <div>
+                  <div class="content">
+                    <cms-app-org></cms-app-org>
+                  </div>
+                </div>
+                <!-- <div>
+                  <div class="content content-checkbox">
+                    <ejs-checkbox label="Cả nhân viên nghỉ việc" (change)="GetEmp($event!)" [checked]="false">
+                    </ejs-checkbox>
+                    <div class="bg-ter"></div>
+                  </div>
+                </div> -->
+              </div>
+            </ng-template>
+          </e-pane>
+          <e-pane>
+            <ng-template #content>
+              <div class="list-grid">
+                  <ejs-grid #overviewgrid id='overviewgrid' [dataSource]='data | async' [allowExcelExport]='true'
+                  (dataStateChange)="dataStateChange($event!)" rowHeight='37' headerHeight='42' [height]='configs.height()'
+                  [allowPaging]='true' [pageSettings]='configs.pageSettings' [enableHover]='true'
+                  (recordDoubleClick)="viewRecord($event!)" [allowSorting]='true' allowResizing='true'
+                  [locale]='configs.currentLang' [allowSelection]='true' [showColumnChooser]='true'
+                  [selectionSettings]='configs.selectionSettings' [editSettings]='configs.editSettings'
+                  (rowSelecting)="setButtonStatus($event!)" (rowDeselecting)="setButtonStatus($event!)" [allowFiltering]='true'
+                  [groupSettings]='groupOptions' [allowGrouping]='true'>
+                  <e-columns>
+                    <e-column type='checkbox' [showInColumnChooser]='false' [allowFiltering]='false' [allowSorting]='false'
+                      width='60' textAlign="Center" [allowEditing]="false">
+                    </e-column>
+                    <e-column field='id' [showInColumnChooser]='false' [visible]='false' headerText='ID' [isPrimaryKey]='true'
+                      [allowEditing]="false">
+                    </e-column>
+                    <e-column field='code' headerTextAlign="Left" textAlign="Left" headerText="Mã"
+                      clipMode='EllipsisWithTooltip' width="100"></e-column>
+                    <e-column field='name' headerTextAlign="Left" textAlign="Left" headerText="Tên tiếng việt"
+                      clipMode='EllipsisWithTooltip' width="200"></e-column>
+                    <e-column field='nameEn' headerTextAlign="Left" textAlign="Left" headerText="Tên tiếng anh"
+                      clipMode='EllipsisWithTooltip' width="200"></e-column>
+                      <e-column field='jobname' headerTextAlign="Left" textAlign="Left" headerText="Công việc"
+                        clipMode='EllipsisWithTooltip' width="200"></e-column>
+                    <e-column field='mastername' headerTextAlign="Left" textAlign="Left" headerText="Master"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='interimname' headerTextAlign="Left" textAlign="Left" headerText="Interim"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='lmname' headerTextAlign="Left" textAlign="Left" headerText="Quản lý trực tiếp"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='orgname' headerTextAlign="Left" textAlign="Left" headerText="Ban/Phòng"
+                      clipMode='EllipsisWithTooltip'>
+                    </e-column>
+                    <e-column field='effectivedate' headerTextAlign="Left" textAlign="Left" headerText="Ngày hiệu lực"
+                      clipMode='EllipsisWithTooltip'[format]="{ type: 'date', format: 'dd/MM/yyyy' }" type="date">
+                    </e-column>                  
+                    <!--  -->
+                    <e-column field='isActive' textAlign="Center" headerText="Trạng thái" clipMode='EllipsisWithTooltip'
+                      width="200">
+                      <ng-template #template let-data>
+                        <div class="row-status full-width">
+                          <div class="status-effect text-center" *ngIf="data.isActive">
+                            <span>Hiệu lực</span>
+                          </div>
+                          <div class="status-not-effect text-center" *ngIf="!data.isActive">
+                            <span>Không hiệu lực</span>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </e-column>
+                  </e-columns>
+                </ejs-grid>
+              </div>
+            </ng-template>
+          </e-pane>
+        </e-panes>
+      </ejs-splitter>
+    </div>
+  </div>
+</div>
+<!-- CONFIRM DELETE MODAL-->
+<gohr-confirm-modal id="confirm-delete-modal">
+  <div class="row full-width gohr-modal-header">
+    Bạn có chắc chắn muốn xóa dữ liệu?
+  </div>
+  <div class="row full-width gohr-modal-footer text-center">
+    <button class="btn btn-primary" (click)="confirmDelete('ok')">Đồng
+      ý</button>
+    <button class="btn btn-default" (click)="confirmDelete('cancel')">Hủy</button>
+  </div>
+</gohr-confirm-modal>
